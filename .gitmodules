@@ -1,0 +1,3 @@
+[submodule "boards/genesys_zu-5ev/embeddedsw"]
+	path = boards/genesys_zu-5ev/embeddedsw
+	url = https://github.com/Digilent/embeddedsw.git
