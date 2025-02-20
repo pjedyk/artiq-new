@@ -1,3 +1,6 @@
 [submodule "boards/genesys_zu-5ev/embeddedsw"]
 	path = boards/genesys_zu-5ev/embeddedsw
 	url = https://github.com/Digilent/embeddedsw.git
+[submodule "boards/genesys_zu-5ev/vivado-boards"]
+	path = boards/genesys_zu-5ev/vivado-boards
+	url = https://github.com/Digilent/vivado-boards.git
