@@ -1,0 +1,6 @@
+[package]
+name = "rust_firmware"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
