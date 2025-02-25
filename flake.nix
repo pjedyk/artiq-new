@@ -22,6 +22,14 @@
       packages = [
         pkgs.alejandra
 
+        (pkgs.python3.withPackages (ps: [
+          ps.isort
+          ps.black
+          ps.pylint
+          ps.mypy
+          ps.colorama
+        ]))
+
         (pkgs.rust-bin.stable."1.75.0".default.override {
           extensions = ["rust-src"];
           targets = ["aarch64-unknown-none"];

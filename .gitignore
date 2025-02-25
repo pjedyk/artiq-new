@@ -1,3 +1,5 @@
+.direnv/
+
 # IDE
 .vscode/
 *.swp
