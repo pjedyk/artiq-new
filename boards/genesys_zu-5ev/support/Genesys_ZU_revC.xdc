@@ -213,14 +213,14 @@ set_property DCI_CASCADE {64} [get_iobanks 65]
 #set_property IOSTANDARD LVCMOS18 [get_ports {mcu_tri_io[3]}]
 
 ##DisplayPort AUX channel over EMIO
-set_property PACKAGE_PIN K12 [get_ports dp_aux_din];         #IO_L2N_AD14N_45/25 Sch=dp_aux_din
-set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_din]
-set_property PACKAGE_PIN K13 [get_ports {dp_aux_doe}];       #IO_L2P_AD14P_45/25 Sch=dp_aux_doe
-set_property IOSTANDARD LVCMOS18 [get_ports {dp_aux_doe}]
-set_property PACKAGE_PIN J11 [get_ports dp_aux_dout];        #IO_L1P_AD15P_45/25 Sch=dp_aux_dout
-set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_dout]
-set_property PACKAGE_PIN J10 [get_ports dp_aux_hotplug_detect];     #IO_L1N_AD15N_45/25 Sch=dp_aux_hotplug_detect
-set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_hotplug_detect]
+#set_property PACKAGE_PIN K12 [get_ports dp_aux_din];         #IO_L2N_AD14N_45/25 Sch=dp_aux_din
+#set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_din]
+#set_property PACKAGE_PIN K13 [get_ports {dp_aux_doe}];       #IO_L2P_AD14P_45/25 Sch=dp_aux_doe
+#set_property IOSTANDARD LVCMOS18 [get_ports {dp_aux_doe}]
+#set_property PACKAGE_PIN J11 [get_ports dp_aux_dout];        #IO_L1P_AD15P_45/25 Sch=dp_aux_dout
+#set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_dout]
+#set_property PACKAGE_PIN J10 [get_ports dp_aux_hotplug_detect];     #IO_L1N_AD15N_45/25 Sch=dp_aux_hotplug_detect
+#set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_hotplug_detect]
 
 ## Mini PCIe Auxiliary
 #set_property -dict { PACKAGE_PIN Y12   IOSTANDARD LVCMOS33 } [get_ports { PCIE_W_DISABLE2N_tri_io[0] }]; #IO_L12P_AD8P_44/24 Sch=pcie_w_disable2n
@@ -292,10 +292,10 @@ set_property IOSTANDARD LVCMOS18 [get_ports dp_aux_hotplug_detect]
 #set_property -dict { PACKAGE_PIN AB14  IOSTANDARD LVCMOS33 } [get_ports { pl_switches_tri_i[3] }]; #IO_L8N_HDGC_44/24 Sch=sw[3]
 
 ## LED
-#set_property -dict { PACKAGE_PIN J14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[0] }]; #IO_L11N_AD1N_46/26 Sch=ld[1]
-#set_property -dict { PACKAGE_PIN K14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[1] }]; #IO_L11P_AD1P_46/26 Sch=ld[2]
-#set_property -dict { PACKAGE_PIN L13   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[2] }]; #IO_L12N_AD0N_46/26 Sch=ld[3]
-#set_property -dict { PACKAGE_PIN L14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[3] }]; #IO_L12P_AD0P_46/26 Sch=ld[4]
+set_property -dict { PACKAGE_PIN J14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[0] }]; #IO_L11N_AD1N_46/26 Sch=ld[1]
+set_property -dict { PACKAGE_PIN K14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[1] }]; #IO_L11P_AD1P_46/26 Sch=ld[2]
+set_property -dict { PACKAGE_PIN L13   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[2] }]; #IO_L12N_AD0N_46/26 Sch=ld[3]
+set_property -dict { PACKAGE_PIN L14   IOSTANDARD LVCMOS33 } [get_ports { pl_leds_tri_o[3] }]; #IO_L12P_AD0P_46/26 Sch=ld[4]
 
 ## RGB LED
 #set_property -dict { PACKAGE_PIN A8    IOSTANDARD LVCMOS12 } [get_ports { pl_rgb_led_tri_o[0] }]; #IO_L23N_T3U_N9_66 Sch=ld5_b

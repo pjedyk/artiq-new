@@ -22,6 +22,7 @@ cp -f -t"${BUILD_DIR}" -- \
     "${T}/support/vivado.tcl" \
     "${T}/support/zynq_ultra_ps_e_0_properties.tcl" \
     "${T}/support/simple_axi_slave.v" \
+    "${T}/support/led_blinker.v" \
     "${T}/support/Genesys_ZU_revC.xdc" \
     "${T}/support/vitis.tcl" \
     "${T}/support/system_wrapper.xsa" \
