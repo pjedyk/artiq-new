@@ -2,6 +2,6 @@ the_ROM_image:
 {
   [pmufw_image] vitis-ws/hw_pf/zynqmp_pmufw/pmufw.elf
   [bootloader, destination_cpu=a53-0] vitis-ws/hw_pf/zynqmp_fsbl/fsbl_a53.elf
-  [destination_device=pl] vivado-proj/artiq_zynqmp.runs/impl_1/system_wrapper.bit
+  [destination_device=pl] build/top.bit
   [destination_cpu=a53-0, exception_level=el-3] vitis-ws/app/Debug/app.elf
 }
