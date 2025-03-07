@@ -5,6 +5,7 @@ from migen.build.xilinx.platform import XilinxPlatform
 from migen.fhdl.module import Module
 from migen.fhdl.specials import Instance
 from migen.fhdl.structure import ClockDomain, Signal
+from migen.genlib.resetsync import AsyncResetSynchronizer
 
 
 class Platform(XilinxPlatform):
@@ -33,16 +34,9 @@ class Platform(XilinxPlatform):
 
         self.toolchain.pre_synthesis_commands.extend(
             [
-                "create_bd_design system",
-                "create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e zynq_ultra_ps_e_0",
-                "create_bd_port -dir O -type clk pl_clk0",
-                "connect_bd_net [get_bd_pins zynq_ultra_ps_e_0/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_lpd_aclk] [get_bd_ports pl_clk0]",
-                "save_bd_design",
-                "generate_target all [get_files system.bd]",
-                "create_ip_run [get_files system.bd]",
-                "launch_runs [get_runs system_*synth_1] -jobs 3",
-                "wait_on_run [get_runs system_*synth_1]",
-                "add_files [make_wrapper -top [get_files system.bd]]",
+                "create_ip -vlnv xilinx.com:ip:zynq_ultra_ps_e -module_name zynq_ultra_ps_e_0",
+                "set_property -dict [list CONFIG.PSU__USE__M_AXI_GP2 0] [get_ips zynq_ultra_ps_e_0]",
+                "synth_ip [get_ips zynq_ultra_ps_e_0]",
             ]
         )
 
@@ -51,21 +45,25 @@ class Top(Module):
     def __init__(self, platform: Platform):
         super().__init__()
 
-        self.clock_domains.cd_sys = ClockDomain(reset_less=True)
-        self.specials += Instance("system_wrapper", o_pl_clk0=self.cd_sys.clk)
+        self.pl_resetn0 = Signal()
+        self.clock_domains.cd_sys = ClockDomain()
+        self.specials += Instance(
+            "zynq_ultra_ps_e_0", o_pl_resetn0=self.pl_resetn0, o_pl_clk0=self.cd_sys.clk
+        )
+        self.specials += AsyncResetSynchronizer(self.cd_sys, ~self.pl_resetn0)
 
-        counter = Signal(26)
+        counter = Signal(30)
         self.sync.sys += counter.eq(counter + 1)
 
         leds = [platform.request("pl_leds", i) for i in range(4)]
         self.comb += [
-            leds[0].eq(counter[25]),
-            leds[1].eq(counter[24]),
-            leds[2].eq(counter[23]),
-            leds[3].eq(counter[22]),
+            leds[0].eq(counter[29]),
+            leds[1].eq(counter[28]),
+            leds[2].eq(counter[27]),
+            leds[3].eq(counter[26]),
         ]
 
 
 P = Platform()
 M = Top(P)
-P.build(M, run=True)
+P.build(M, build_dir="migen-ws", run=True)
