@@ -15,9 +15,12 @@ XILINX_VITIS="${XILINX_VITIS:-"/opt/Xilinx/Vitis/2024.2"}"
 
 mkdir -p -- "${BUILD_DIR}/src"
 ln -fns -t"${BUILD_DIR}" -- \
+    "${T}/vivado-boards" \
     "${T}/embeddedsw" \
     "${T}/firmware/target"
 cp -f -t"${BUILD_DIR}" -- \
+    "${T}/support/vivado.tcl" \
+    "${T}/support/zynq_ultra_ps_e_0.properties.tcl" \
     "${T}/support/gateware.py" \
     "${T}/support/vitis.tcl" \
     "${T}/support/system_wrapper.xsa" \
@@ -26,6 +29,9 @@ cp -f -t"${BUILD_DIR}/src" -- \
     "${T}/firmware/src/boot.c"
 
 (   source -- "${XILINX_VIVADO}/settings64.sh"
+    env -C"${BUILD_DIR}" -- vivado -mode batch -script vivado.tcl
+    mkdir -p -- "${BUILD_DIR}/migen-build"
+    ln -fnsT -- migen-build/ip "${BUILD_DIR}/migen-build/ip"
     env -C"${BUILD_DIR}" -- ./gateware.py
 )
 

@@ -1,11 +1,16 @@
 #! /usr/bin/env python3
 
+from functools import reduce
+from operator import truediv
+from pathlib import Path
+
 from migen.build.generic_platform import IOStandard, Pins
 from migen.build.xilinx.platform import XilinxPlatform
 from migen.fhdl.module import Module
 from migen.fhdl.specials import Instance
 from migen.fhdl.structure import ClockDomain, Signal
-from migen.genlib.resetsync import AsyncResetSynchronizer
+
+CWD = Path(".")
 
 
 class Platform(XilinxPlatform):
@@ -27,17 +32,25 @@ class Platform(XilinxPlatform):
             toolchain="vivado",
         )
 
+        self.add_ip(
+            reduce(
+                truediv,
+                [
+                    CWD,
+                    "vivado-proj",
+                    "design.srcs",
+                    "sources_1",
+                    "bd",
+                    "system",
+                    "ip",
+                    "system_zynq_ultra_ps_e_0_0",
+                    "system_zynq_ultra_ps_e_0_0.xci",
+                ],
+            )
+        )
+
         self.add_platform_command(
             "set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]"
-        )
-        self.add_platform_command("set_property DCI_CASCADE {{64}} [get_iobanks 65]")
-
-        self.toolchain.pre_synthesis_commands.extend(
-            [
-                "create_ip -vlnv xilinx.com:ip:zynq_ultra_ps_e -module_name zynq_ultra_ps_e_0",
-                "set_property -dict [list CONFIG.PSU__USE__M_AXI_GP2 0] [get_ips zynq_ultra_ps_e_0]",
-                "synth_ip [get_ips zynq_ultra_ps_e_0]",
-            ]
         )
 
 
@@ -45,12 +58,14 @@ class Top(Module):
     def __init__(self, platform: Platform):
         super().__init__()
 
-        self.pl_resetn0 = Signal()
-        self.clock_domains.cd_sys = ClockDomain()
+        pl_clk0 = Signal()
+        pl_resetn0 = Signal()
         self.specials += Instance(
-            "zynq_ultra_ps_e_0", o_pl_resetn0=self.pl_resetn0, o_pl_clk0=self.cd_sys.clk
+            "system_zynq_ultra_ps_e_0_0", o_pl_clk0=pl_clk0, o_pl_resetn0=pl_resetn0
         )
-        self.specials += AsyncResetSynchronizer(self.cd_sys, ~self.pl_resetn0)
+        self.clock_domains.cd_sys = ClockDomain()
+        self.comb += self.cd_sys.clk.eq(pl_clk0)
+        self.comb += self.cd_sys.rst.eq(~pl_resetn0)
 
         counter = Signal(30)
         self.sync.sys += counter.eq(counter + 1)
@@ -66,4 +81,4 @@ class Top(Module):
 
 P = Platform()
 M = Top(P)
-P.build(M, build_dir="migen-ws", run=True)
+P.build(M, build_dir="migen-build", run=True)
