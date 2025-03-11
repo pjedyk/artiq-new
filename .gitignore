@@ -1,5 +1,9 @@
 .direnv/
 
+# Python
+__pycache__/
+.mypy_cache/
+
 # IDE
 .vscode/
 *.swp

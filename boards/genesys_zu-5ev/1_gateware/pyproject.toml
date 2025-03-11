@@ -1,0 +1,32 @@
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+skip-magic-trailing-comma = true
+
+[tool.mypy]
+strict = true
+disallow_untyped_calls = false
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+module = "migen.*"
+ignore_missing_imports = true
+
+[tool.pylint.main]
+ignore-patterns = [".+\\.pyi"]
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-module-docstring",  # C0114
+    "missing-class-docstring",  # C0115
+    "missing-function-docstring",  # C0116
+    "import-error",  # E0401
+    "no-name-in-module",  # E0611
+    "no-member",  # E1101
+]
