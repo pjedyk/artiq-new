@@ -6,10 +6,15 @@ override O := $(abspath $(O))
 
 CONFIG := debug
 
-I_PLATFORM := $(I)/0_platform
-I_GATEWARE := $(I)/1_gateware
-I_FIRMWARE := $(I)/2_firmware
-I_BOOTABLE := $(I)/3_bootable
+PLATFORM := 0_platform
+GATEWARE := 1_gateware
+FIRMWARE := 2_firmware
+BOOTABLE := 3_bootable
+
+I_PLATFORM := $(I)/$(PLATFORM)
+I_GATEWARE := $(I)/$(GATEWARE)
+I_FIRMWARE := $(I)/$(FIRMWARE)
+I_BOOTABLE := $(I)/$(BOOTABLE)
 
 I_FIRMWARE_SRC := $(I_FIRMWARE)/src
 
@@ -22,9 +27,11 @@ I_VIVADO_SCRIPT_TCL := $(I_PLATFORM)/vivado_script.tcl
 I_ZYNQ_ULTRA_PS_E_0_PROPERTIES_TCL := $(I_PLATFORM)/zynq_ultra_ps_e_0.properties.tcl
 I_MAIN_C := $(I_FIRMWARE_SRC)/main.c
 I_GATEWARE_PY := $(I_GATEWARE)/gateware.py
+I_GATEWARE_wildcard_PY := $(wildcard $(I_GATEWARE)/*.py)
 I_VITIS_SCRIPT_PY := $(I_BOOTABLE)/vitis_script.py
 I_XFSBL_DDR_INIT_C := $(I_BOOTABLE)/xfsbl_ddr_init.c
 
+O_ZYNQ_ULTRA_PS_E_0 := $(O)/zynq_ultra_ps_e_0
 O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI := $(O)/platform_zynq_ultra_ps_e_0_0.xci
 O_PLATFORM_XSA := $(O)/platform.xsa
 O_TOP_BIT := $(O_MIGEN_BUILD)/top.bit
@@ -35,9 +42,12 @@ O_APP_ELF := $(O_VITIS_WS)/app/build/app.elf
 O_BOOT_BIF := $(O)/boot.bif
 O_BOOT_BIN := $(O)/boot.bin
 
-.PHONY: all
-all: $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA) $(O_TOP_BIT) \
- $(O_LIBRUST_FIRMWARE_A) $(O_FSBL_ELF) $(O_APP_ELF) $(O_BOOT_BIF) $(O_BOOT_BIN)
+.PHONY: all $(PLATFORM) $(GATEWARE) $(FIRMWARE) $(BOOTABLE)
+all: $(PLATFORM) $(GATEWARE) $(FIRMWARE) $(BOOTABLE)
+$(PLATFORM): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA)
+$(GATEWARE): $(O_TOP_BIT)
+$(FIRMWARE): $(O_LIBRUST_FIRMWARE_A)
+$(BOOTABLE): $(O_FSBL_ELF) $(O_APP_ELF) $(O_BOOT_BIF) $(O_BOOT_BIN)
 
 $(O):
 	mkdir -- "$(O)"
@@ -47,9 +57,9 @@ $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA)&: \
 	env -C "$(O)" -- vivado -mode batch \
 	  -script "$(I_VIVADO_SCRIPT_TCL)"
 
-$(O_TOP_BIT): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(I_GATEWARE_PY)
-	env -C "$(O)" -- "$(I_GATEWARE_PY)" \
-	  -I "$(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI)"
+$(O_TOP_BIT): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(I_GATEWARE_wildcard_PY)
+	env -C "$(O)" -- "$(I_GATEWARE_PY)" -B $(O_MIGEN_BUILD) \
+	  -I "$(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI)" -Z "$(O_ZYNQ_ULTRA_PS_E_0)"
 
 $(O_LIBRUST_FIRMWARE_A):
 	env -C "$(I_FIRMWARE)" -- cargo build \
