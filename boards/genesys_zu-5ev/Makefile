@@ -24,7 +24,7 @@ O_RUST_FW_DIR := $(O_CARGO_BUILD)/aarch64-unknown-none/$(CONFIG)
 O_VITIS_WS := $(O)/vitis-ws
 
 I_VIVADO_SCRIPT_TCL := $(I_PLATFORM)/vivado_script.tcl
-I_ZYNQ_ULTRA_PS_E_0_PROPERTIES_TCL := $(I_PLATFORM)/zynq_ultra_ps_e_0.properties.tcl
+I_PLATFORM_wildcard_TCL := $(wildcard $(I_PLATFORM)/*.tcl)
 I_MAIN_C := $(I_FIRMWARE_SRC)/main.c
 I_GATEWARE_PY := $(I_GATEWARE)/gateware.py
 I_GATEWARE_wildcard_PY := $(wildcard $(I_GATEWARE)/*.py)
@@ -53,11 +53,12 @@ $(O):
 	mkdir -- "$(O)"
 
 $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA)&: \
- $(I_VIVADO_SCRIPT_TCL) $(I_ZYNQ_ULTRA_PS_E_0_PROPERTIES_TCL) | $(O)
+ $(I_VIVADO_SCRIPT_TCL) $(I_PLATFORM_wildcard_TCL) | $(O)
 	env -C "$(O)" -- vivado -mode batch \
 	  -script "$(I_VIVADO_SCRIPT_TCL)"
 
-$(O_TOP_BIT): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(I_GATEWARE_wildcard_PY)
+$(O_TOP_BIT): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(I_GATEWARE_PY) \
+ $(I_GATEWARE_wildcard_PY)
 	env -C "$(O)" -- "$(I_GATEWARE_PY)" -B $(O_MIGEN_BUILD) \
 	  -I "$(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI)" -Z "$(O_ZYNQ_ULTRA_PS_E_0)"
 
