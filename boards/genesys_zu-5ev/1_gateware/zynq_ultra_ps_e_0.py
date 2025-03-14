@@ -66,6 +66,7 @@ class ZynqUltraPsE(Module):
         pin_type = pin_props["TYPE"]
         pin_type_to_importer = {
             "undef": self._import_pin_undef,
+            "intr": self._import_pin_intr,
             "clk": self._import_pin_clk,
             "rst": self._import_pin_rst,
         }
@@ -95,6 +96,9 @@ class ZynqUltraPsE(Module):
         self._glue[pin_name] = signal
 
         return signal_shifted
+
+    def _import_pin_intr(self, pin_props: Dict[str, str]) -> Signal:
+        return self._import_pin_undef(pin_props)
 
     def _import_pin_clk(self, pin_props: Dict[str, str]) -> Signal:
         assert pin_props["LEFT"] == ""
