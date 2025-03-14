@@ -9,12 +9,10 @@ set_property -dict [list \
 # Clock Configuration
 set_property -dict [list \
     CONFIG.PSU__PSS_REF_CLK__FREQMHZ {30} \
-    CONFIG.PSU__CRF_APB__DDR_CTRL__FREQMHZ {1066} \
     CONFIG.PSU__CRF_APB__GDMA_REF_CTRL__SRCSEL {APLL} \
     CONFIG.PSU__CRF_APB__GPU_REF_CTRL__SRCSEL {IOPLL} \
     CONFIG.PSU__CRF_APB__TOPSW_MAIN_CTRL__SRCSEL {DPLL} \
     CONFIG.PSU__CRL_APB__PL0_REF_CTRL__SRCSEL {IOPLL} \
-    CONFIG.PSU__CRL_APB__QSPI_REF_CTRL__FREQMHZ {250} \
     CONFIG.PSU__DLL__ISUSED {1} \
 ] [get_bd_cells zynq_ultra_ps_e_0]
 
@@ -28,6 +26,7 @@ set_property -dict [list \
     CONFIG.PSU__DDRC__DDR4_ADDR_MAPPING {0} \
     CONFIG.PSU__DDRC__DDR4_T_REF_MODE {1} \
     CONFIG.PSU__DDRC__ROW_ADDR_COUNT {15} \
+    CONFIG.PSU__CRF_APB__DDR_CTRL__FREQMHZ {1066} \
 ] [get_bd_cells zynq_ultra_ps_e_0]
 
 # Peripheral - UART
@@ -53,4 +52,5 @@ set_property -dict [list \
     CONFIG.PSU__QSPI__PERIPHERAL__DATA_MODE {x4} \
     CONFIG.PSU__QSPI__GRP_FBCLK__ENABLE {1} \
     CONFIG.PSU__QSPI__GRP_FBCLK__IO {MIO 6} \
+    CONFIG.PSU__CRL_APB__QSPI_REF_CTRL__FREQMHZ {250} \
 ] [get_bd_cells zynq_ultra_ps_e_0]
