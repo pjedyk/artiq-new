@@ -16,8 +16,7 @@ I_GATEWARE := $(I)/$(GATEWARE)
 I_FIRMWARE := $(I)/$(FIRMWARE)
 I_BOOTABLE := $(I)/$(BOOTABLE)
 
-I_FIRMWARE_SRC := $(I_FIRMWARE)/src
-I_BOOTABLE_SRC := $(I_FIRMWARE)/src
+I_BOOTABLE_SRC := $(I_BOOTABLE)/src
 
 O_MIGEN_BUILD := $(O)/migen-build
 O_CARGO_BUILD := $(O)/cargo-build
@@ -67,7 +66,7 @@ $(O_FSBL_ELF) $(O_APP_ELF)&: $(O_PLATFORM_XSA) $(O_LIBRUST_FIRMWARE_A) \
  $(I_VITIS_SCRIPT_PY) $(I_XFSBL_DDR_INIT_C) $(I_BOOTABLE_SRC_wildcard_CHS)
 	env -C "$(O)" -- vitis -s "$(I_VITIS_SCRIPT_PY)" \
 	  -W "$(O_VITIS_WS)" -H "$(O_PLATFORM_XSA)" \
-	  -S "$(I_FIRMWARE_SRC)" -R "$(O_RUST_FW_DIR)"
+	  -S "$(I_BOOTABLE_SRC)" -R "$(O_RUST_FW_DIR)"
 
 .ONESHELL: $(O_BOOT_BIF)
 $(O_BOOT_BIF): | $(O)
