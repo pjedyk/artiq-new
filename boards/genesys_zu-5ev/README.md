@@ -4,7 +4,7 @@
 
 ## Build system
 
-[https://www.gnu.org/software/make/manual/make.html](GNU make) serves as top build system.
+[GNU make](https://www.gnu.org/software/make/manual/make.html) serves as top build system.
 
 The process has four stages. You may stop at any stage, passing the stage name to the make program:
 
