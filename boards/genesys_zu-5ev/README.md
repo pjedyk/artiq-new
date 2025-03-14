@@ -4,9 +4,9 @@
 
 ## Build system
 
-[GNU make](https://www.gnu.org/software/make/manual/make.html) serves as top build system.
+[GNU `make`](https://www.gnu.org/software/make/manual/make.html) serves as top build system.
 
-The process has four stages. You may stop at any stage, passing the stage name to the make program:
+The process has four stages. You may stop at any stage, passing the stage name to the `make` program:
 
 ```Shell
 make 0_platform  # stop immediately after 0_platform
@@ -50,7 +50,7 @@ The default build directory is `build`. You may override this setting by using `
 
 The `0_platform` stage is a [TCL](https://www.tcl-lang.org/) script that uses [Vivado](https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html) to generate:
 - `platform.xsa` file for [Vitis](https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis.html),
-- `*.xci` files to be imported as an IP in [Migen](https://m-labs.hk/gateware/migen/),
+- `*.xci` files to be imported as IPs in [Migen](https://m-labs.hk/gateware/migen/),
 - `mi_*.txt` and other files for Vivado-Migen integration.
 
 The `1_gateware` stage is a Migen project (implies [Python](https://www.python.org/) and Vivado usage) which build artifact is:
@@ -160,4 +160,4 @@ Temporary breakpoint 1, main () at /project/artiq-zynqmp/boards/genesys_zu-5ev/b
 (gdb) █
 ```
 
-**NOTE:** Do not close xsdb as it is a debug server!
+**NOTE:** Do not close `xsdb` as it is a debug server!
