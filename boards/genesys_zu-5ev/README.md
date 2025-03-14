@@ -29,7 +29,7 @@ make  # build everything
 `1_gateware` depends on :
 - `0_platform`.
 
-2_firmware` depends on:
+`2_firmware` depends on:
 - nothing.
 
 `3_bootable` depends on:
