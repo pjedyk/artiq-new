@@ -17,6 +17,7 @@ ignore_missing_imports = true
 
 [tool.pylint.main]
 ignore-patterns = [".+\\.pyi"]
+ignored-modules = "vitis"
 
 [tool.pylint.format]
 max-line-length = 120
@@ -26,7 +27,10 @@ disable = [
     "missing-module-docstring",  # C0114
     "missing-class-docstring",  # C0115
     "missing-function-docstring",  # C0116
-    "import-error",  # E0401
-    "no-name-in-module",  # E0611
-    "no-member",  # E1101
+]
+
+[tool.pylint.typecheck]
+generated-members = [
+    "comb",
+    "specials",
 ]

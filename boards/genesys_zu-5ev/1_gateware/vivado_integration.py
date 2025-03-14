@@ -2,50 +2,64 @@
 
 from pathlib import Path
 from string import digits
-from typing import Dict, Iterator
+from typing import Dict, Iterator, Never
 
+from migen.build.xilinx.platform import XilinxPlatform
 from migen.fhdl.module import Module
 from migen.fhdl.specials import Instance
 from migen.fhdl.structure import Signal
 
+MI_PART_TXT = "mi_part.txt"
+MI_BD_CELLS_TXT = "mi_bd_cells.txt"
+MI_XCI_FILES_TXT = "mi_xci_files.txt"
 
-class ZynqUltraPsE(Module):
-    PINS_TXT = "pins.txt"
-    PIN_X_TXT = "pins.{}.txt"
-    ENCODING = "utf-8"
+PINS_TXT = "pins.txt"
+PIN_X_TXT = "pins.{}.txt"
+PROPERTIES_TXT = "properties.txt"
+ENCODING = "utf-8"
 
+
+def read_list(path: Path) -> Iterator[str]:
+    with path.open(encoding=ENCODING) as f:
+        for pin_name in f:
+            pin_name = pin_name.strip()
+            if pin_name != "":
+                yield pin_name
+
+
+def read_value(path: Path) -> str:
+    values = list(read_list(path))
+    assert len(values) == 1
+    return values[0]
+
+
+def read_properties(path: Path) -> Dict[str, str]:
+    props = {}
+    with path.open(encoding=ENCODING) as f:
+        for line in f:
+            words = list(map(str.strip, line.split(maxsplit=3)))
+            assert len(words) in [3, 4]
+            if words == ["Property", "Type", "Read-only", "Value"]:
+                continue
+            assert words[1] in ["bool", "enum", "string", "string*"]
+            assert words[2] in ["true", "false"]
+            key = words[0]
+            value = "".join(words[3:])
+            props[key] = value
+    return props
+
+
+class BdCell(Module):
     def __init__(self, export_dir: Path):
         self.inputs: Dict[str, Signal] = {}
         self.outputs: Dict[str, Signal] = {}
         self._glue: Dict[str, Signal] = {}
-        for pin_name in self._get_pin_names(export_dir / self.PINS_TXT):
-            pin_props = self._read_properties(export_dir / self.PIN_X_TXT.format(pin_name))
+        for pin_name in read_list(export_dir / PINS_TXT):
+            pin_props = read_properties(export_dir / PIN_X_TXT.format(pin_name))
             self._import_pin(pin_props)
-        self._instance_zynq()
 
-    @classmethod
-    def _get_pin_names(cls, path: Path) -> Iterator[str]:
-        with path.open(encoding=cls.ENCODING) as f:
-            for pin_name in f:
-                pin_name = pin_name.strip()
-                if pin_name != "":
-                    yield pin_name
-
-    @classmethod
-    def _read_properties(cls, path: Path) -> Dict[str, str]:
-        props = {}
-        with path.open(encoding=cls.ENCODING) as f:
-            for line in f:
-                words = list(map(str.strip, line.split(maxsplit=3)))
-                assert len(words) in [3, 4]
-                if words == ["Property", "Type", "Read-only", "Value"]:
-                    continue
-                assert words[1] in ["string"]
-                assert words[2] in ["true", "false"]
-                key = words[0]
-                value = "".join(words[3:])
-                props[key] = value
-        return props
+        cell_props = read_properties(export_dir / PROPERTIES_TXT)
+        self._instance(cell_props)
 
     def _import_pin(self, pin_props: Dict[str, str]) -> None:
         assert "NAME" in pin_props
@@ -113,7 +127,11 @@ class ZynqUltraPsE(Module):
 
         return self._import_pin_undef(pin_props)
 
-    def _instance_zynq(self) -> None:
+    def _instance(self, cell_props: Dict[str, str]) -> None:
+        assert "CONFIG.Component_Name" in cell_props
+
+        name = cell_props["CONFIG.Component_Name"]
+
         pin_mapping = {}
         for pin_name in self.inputs:
             signal = self._glue[pin_name]
@@ -121,4 +139,28 @@ class ZynqUltraPsE(Module):
         for pin_name in self.outputs:
             signal = self._glue[pin_name]
             pin_mapping[f"o_{pin_name}"] = signal
-        self.specials += Instance("platform_zynq_ultra_ps_e_0_0", **pin_mapping)
+
+        self.specials += Instance(name, **pin_mapping)
+
+
+class XilinxPlatformAuto(XilinxPlatform):
+    def __init__(self, build_dir: Path):
+        part = read_value(build_dir / MI_PART_TXT)
+        super().__init__(part, [], name="genesys_zu-5ev", toolchain="vivado")
+
+        self.add_platform_command("set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]")
+
+        self.bd_cells: Dict[str, BdCell] = {}
+        for bd_cell_name in read_list(build_dir / MI_BD_CELLS_TXT):
+            assert bd_cell_name not in self.bd_cells
+            self.bd_cells[bd_cell_name] = BdCell(build_dir / bd_cell_name)
+
+        for xci_file in read_list(build_dir / MI_XCI_FILES_TXT):
+            self.add_ip(xci_file)
+
+    def import_submodules_to(self, module: Module) -> None:
+        for bd_cell_name, bd_cell in self.bd_cells.items():
+            setattr(module.submodules, bd_cell_name, bd_cell)
+
+    def create_programmer(self) -> Never:
+        raise NotImplementedError()

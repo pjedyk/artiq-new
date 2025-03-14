@@ -17,6 +17,7 @@ I_FIRMWARE := $(I)/$(FIRMWARE)
 I_BOOTABLE := $(I)/$(BOOTABLE)
 
 I_FIRMWARE_SRC := $(I_FIRMWARE)/src
+I_BOOTABLE_SRC := $(I_FIRMWARE)/src
 
 O_MIGEN_BUILD := $(O)/migen-build
 O_CARGO_BUILD := $(O)/cargo-build
@@ -25,14 +26,12 @@ O_VITIS_WS := $(O)/vitis-ws
 
 I_VIVADO_SCRIPT_TCL := $(I_PLATFORM)/vivado_script.tcl
 I_PLATFORM_wildcard_TCL := $(wildcard $(I_PLATFORM)/*.tcl)
-I_MAIN_C := $(I_FIRMWARE_SRC)/main.c
 I_GATEWARE_PY := $(I_GATEWARE)/gateware.py
 I_GATEWARE_wildcard_PY := $(wildcard $(I_GATEWARE)/*.py)
 I_VITIS_SCRIPT_PY := $(I_BOOTABLE)/vitis_script.py
 I_XFSBL_DDR_INIT_C := $(I_BOOTABLE)/xfsbl_ddr_init.c
+I_BOOTABLE_SRC_wildcard_CHS := $(wildcard $(I_BOOTABLE_SRC)/*.[chS])
 
-O_ZYNQ_ULTRA_PS_E_0 := $(O)/zynq_ultra_ps_e_0
-O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI := $(O)/platform_zynq_ultra_ps_e_0_0.xci
 O_PLATFORM_XSA := $(O)/platform.xsa
 O_TOP_BIT := $(O_MIGEN_BUILD)/top.bit
 O_LIBRUST_FIRMWARE_A := $(O_RUST_FW_DIR)/librust_firmware.a
@@ -44,7 +43,7 @@ O_BOOT_BIN := $(O)/boot.bin
 
 .PHONY: all $(PLATFORM) $(GATEWARE) $(FIRMWARE) $(BOOTABLE)
 all: $(PLATFORM) $(GATEWARE) $(FIRMWARE) $(BOOTABLE)
-$(PLATFORM): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA)
+$(PLATFORM): $(O_PLATFORM_XSA)
 $(GATEWARE): $(O_TOP_BIT)
 $(FIRMWARE): $(O_LIBRUST_FIRMWARE_A)
 $(BOOTABLE): $(O_FSBL_ELF) $(O_APP_ELF) $(O_BOOT_BIF) $(O_BOOT_BIN)
@@ -52,15 +51,11 @@ $(BOOTABLE): $(O_FSBL_ELF) $(O_APP_ELF) $(O_BOOT_BIF) $(O_BOOT_BIN)
 $(O):
 	mkdir -- "$(O)"
 
-$(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(O_PLATFORM_XSA)&: \
- $(I_VIVADO_SCRIPT_TCL) $(I_PLATFORM_wildcard_TCL) | $(O)
-	env -C "$(O)" -- vivado -mode batch \
-	  -script "$(I_VIVADO_SCRIPT_TCL)"
+$(O_PLATFORM_XSA)&: $(I_VIVADO_SCRIPT_TCL) $(I_PLATFORM_wildcard_TCL) | $(O)
+	env -C "$(O)" -- vivado -mode batch -script "$(I_VIVADO_SCRIPT_TCL)"
 
-$(O_TOP_BIT): $(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI) $(I_GATEWARE_PY) \
- $(I_GATEWARE_wildcard_PY)
-	env -C "$(O)" -- "$(I_GATEWARE_PY)" -B $(O_MIGEN_BUILD) \
-	  -I "$(O_PLATFORM_ZYNQ_ULTRA_PS_E_0_0_XCI)" -Z "$(O_ZYNQ_ULTRA_PS_E_0)"
+$(O_TOP_BIT): $(O_PLATFORM_XSA) $(I_GATEWARE_PY) $(I_GATEWARE_wildcard_PY)
+	env -C "$(O)" -- "$(I_GATEWARE_PY)" -B "$(O)" -M "$(O_MIGEN_BUILD)"
 
 $(O_LIBRUST_FIRMWARE_A):
 	env -C "$(I_FIRMWARE)" -- cargo build \
@@ -68,8 +63,8 @@ $(O_LIBRUST_FIRMWARE_A):
 	  --profile="$(subst debug,dev,$(CONFIG))"
 -include $(O_LIBRUST_FIRMWARE_D)
 
-$(O_FSBL_ELF) $(O_APP_ELF)&: $(O_PLATFORM_XSA) $(I_MAIN_C) \
- $(O_LIBRUST_FIRMWARE_A) $(I_VITIS_SCRIPT_PY) $(I_XFSBL_DDR_INIT_C)
+$(O_FSBL_ELF) $(O_APP_ELF)&: $(O_PLATFORM_XSA) $(O_LIBRUST_FIRMWARE_A) \
+ $(I_VITIS_SCRIPT_PY) $(I_XFSBL_DDR_INIT_C) $(I_BOOTABLE_SRC_wildcard_CHS)
 	env -C "$(O)" -- vitis -s "$(I_VITIS_SCRIPT_PY)" \
 	  -W "$(O_VITIS_WS)" -H "$(O_PLATFORM_XSA)" \
 	  -S "$(I_FIRMWARE_SRC)" -R "$(O_RUST_FW_DIR)"
