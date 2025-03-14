@@ -157,6 +157,13 @@ Continuing.
 
 Temporary breakpoint 1, main () at /project/artiq-zynqmp/boards/genesys_zu-5ev/build/vitis-ws/app/src/main.c:7
 7           rust_main();
+(gdb) s
+rust_firmware::rust_main () at src/lib.rs:7
+7           let mut _x: u32 = 0;
+(gdb)
+9           loop {
+(gdb)
+10              _x += 1;
 (gdb) █
 ```
 
