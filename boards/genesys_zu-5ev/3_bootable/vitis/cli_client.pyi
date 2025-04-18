@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Sequence
+from typing import Dict, Literal, Optional, Sequence
 
 from vitis.component import HostComponent
 from vitis.platform_component import Platform
@@ -25,6 +25,14 @@ class Embedded:
         generate_dtb: bool = True,
         advanced_options: Dict[str, str] = {},
     ) -> Platform: ...
+    def create_advanced_options_dict(
+        self,
+        sdt_repo: Optional[str] = None,
+        board_dtsi: Optional[str] = None,
+        user_dtsi: Optional[str] = None,
+        dt_overlay: Optional[Literal["0", "1"]] = None,
+        dt_zocl: Optional[Literal["0", "1"]] = None,
+    ) -> Dict[str, str]: ...
     def create_app_component(
         self,
         name: str,
