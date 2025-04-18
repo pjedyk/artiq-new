@@ -5,7 +5,7 @@ I_BBLAYERS_CONF_IN := $(I_LINUX)/bblayers.conf.in
 I_LOCAL_CONF_IN := $(I_LINUX)/local.conf.in
 I_ZYNQMP_ARTIQ_CONF_IN := $(I_LINUX)/zynqmp-artiq.conf.in
 I_YOCTO := $(abspath ../../common/yocto/rel-v2024.2)
-I_SETUPSDK := $(I_YOCTO)/yocto-scripts/setupsdk
+I_SETUPSDK := $(I_YOCTO)/setupsdk
 
 O_LINUX := $(O)/linux
 O_LINUX_CONF := $(O_LINUX)/conf
