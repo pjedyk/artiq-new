@@ -1,0 +1,5 @@
+require conf/machine/zynqmp-generic.conf
+
+MACHINE_HWCODECS = ""
+
+FSBL_FILE = "_FSBL_FILE_"
