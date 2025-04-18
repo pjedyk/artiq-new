@@ -8,7 +8,7 @@ extern "C" fn rust_main() -> ! {
 
     loop {
         _x += 1;
-        _x -=1;
+        _x -= 1;
     }
 }
 

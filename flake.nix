@@ -28,13 +28,18 @@
           ps.pylint
           ps.mypy
           ps.colorama
+          ps.pyyaml
         ]))
 
         (pkgs.rust-bin.stable."1.75.0".default.override {
           extensions = ["rust-src"];
-          targets = ["aarch64-unknown-none"];
+          targets = ["armv7r-none-eabihf"];
         })
       ];
+      env = {
+        LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+        BB_ENV_PASSTHROUGH_ADDITIONS = "LOCALE_ARCHIVE";
+      };
     };
   };
 }
