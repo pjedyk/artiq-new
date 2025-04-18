@@ -54,3 +54,21 @@ set_property -dict [list \
     CONFIG.PSU__QSPI__GRP_FBCLK__IO {MIO 6} \
     CONFIG.PSU__CRL_APB__QSPI_REF_CTRL__FREQMHZ {250} \
 ] [get_bd_cells zynq_ultra_ps_e_0]
+
+# Peripheral - SD
+set_property -dict [list \
+    CONFIG.PSU__SD1__PERIPHERAL__ENABLE {1} \
+    CONFIG.PSU__SD1__PERIPHERAL__IO {MIO 39 .. 51} \
+    CONFIG.PSU__SD1__GRP_CD__ENABLE {1} \
+    CONFIG.PSU__SD1__GRP_CD__IO {MIO 45} \
+    CONFIG.PSU__SD1__GRP_POW__ENABLE {1} \
+    CONFIG.PSU__SD1__GRP_POW__IO {MIO 43} \
+] [get_bd_cells zynq_ultra_ps_e_0]
+
+# Peripheral - Ethernet
+set_property -dict [list \
+    CONFIG.PSU__ENET0__PERIPHERAL__ENABLE {1} \
+    CONFIG.PSU__ENET0__PERIPHERAL__IO {MIO 26 .. 37} \
+    CONFIG.PSU__ENET0__GRP_MDIO__ENABLE {1} \
+    CONFIG.PSU__ENET0__GRP_MDIO__IO {MIO 76 .. 77} \
+] [get_bd_cells zynq_ultra_ps_e_0]
