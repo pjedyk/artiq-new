@@ -1,5 +1,9 @@
 require conf/machine/zynqmp-generic.conf
 
+FSBL_FILE = "_FSBL_FILE_"
 MACHINE_HWCODECS = ""
 
-FSBL_FILE = "_FSBL_FILE_"
+INITRAMFS_IMAGE = "artiqlinux-initramfs-image"
+INITRAMFS_FSTYPES = "cpio.gz.u-boot"
+IMAGE_BOOT_FILES += "${INITRAMFS_IMAGE}-${MACHINE}.${INITRAMFS_FSTYPES}"
+IMAGE_FSTYPES += "wic"

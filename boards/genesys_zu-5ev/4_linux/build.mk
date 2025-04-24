@@ -1,5 +1,7 @@
 LINUX := $(THIS)
 
+BITBAKE_IMAGE := artiqlinux-image-default
+
 I_LINUX := $(I)/$(LINUX)
 I_BBLAYERS_CONF_IN := $(I_LINUX)/bblayers.conf.in
 I_LOCAL_CONF_IN := $(I_LINUX)/local.conf.in
@@ -17,7 +19,7 @@ O_all_CONF := $(O_BBLAYERS_CONF) $(O_LOCAL_CONF) $(O_ZYNQMP_ARTIQ_CONF)
 O_SETUPSDK := $(O_LINUX)/setupsdk
 O_SDT_TOP_BIT := $(O_VITIS_WS)/hw_pf/hw/sdt/top.bit
 O_IMAGES := $(O_LINUX)/tmp/deploy/images/xlnx-zynqmp
-O_IMAGE_WIC := $(O_IMAGES)/petalinux-image-minimal-xlnx-zynqmp.wic
+O_IMAGE_WIC := $(O_IMAGES)/$(BITBAKE_IMAGE)-xlnx-zynqmp.wic
 
 .PHONY: $(LINUX)
 all: $(LINUX)
@@ -32,7 +34,7 @@ $(O_BBLAYERS_CONF): $(I_BBLAYERS_CONF_IN) | $(O_LINUX_CONF)
 $(O_LOCAL_CONF): $(I_LOCAL_CONF_IN) | $(O_LINUX_CONF)
 $(O_ZYNQMP_ARTIQ_CONF): $(I_ZYNQMP_ARTIQ_CONF_IN) | $(O_LINUX_CONF_MACHINE)
 $(O_all_CONF):
-	m4 -D_YOCTO_="$(I_YOCTO)" -D_BUILD_="$(O)" \
+	m4 -D_YOCTO_="$(I_YOCTO)" -D_LINUX_="$(I_LINUX)" -D_BUILD_="$(O)" \
 	  -D_FSBL_FILE_="$(basename $(O_FSBL_ELF))" -- "$(^)" >"$(@)"
 
 $(O_SETUPSDK):
@@ -48,4 +50,4 @@ $(O_IMAGE_WIC): $(O_all_CONF) $(O_SETUPSDK) $(O_SDT_TOP_BIT)
 	  --add-config='CONFIG_YOCTO_INCLUDE_MACHINE_NAME="zynqmp-artiq"' \
 	  --hw-description="$(dir $(O_SDT_TOP_BIT))" \
 	  parse-sdt -l "$(O_LOCAL_CONF)" && \
-	bitbake -- petalinux-image-minimal
+	bitbake -- $(BITBAKE_IMAGE)

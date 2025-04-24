@@ -46,4 +46,5 @@ BBLAYERS ?= " \
   _YOCTO_/sources/meta-ros/meta-ros-common \
   _YOCTO_/sources/meta-ros/meta-ros2 \
   _YOCTO_/sources/meta-ros/meta-ros2-jazzy \
+  _LINUX_/meta-artiq \
 "
