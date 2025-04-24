@@ -1,0 +1,115 @@
+#! /bin/sh --
+
+_rescue() {
+    cat <<EOF
+
+    **INITRAMFS RESCUE SHELL**
+
+    Something bad happened.
+
+    -> Press any key <-
+
+    Or the /init script will exit after a timeout of 10 seconds,
+    which shall panic the kernel.
+
+EOF
+    read -r -n1 -t10 || return
+    cat <<EOF
+    ===
+
+    **NOTE**: You are PID=1 now - be careful on exits!
+
+EOF
+    exec /bin/sh
+}
+trap _rescue EXIT
+
+install -d -- /dev /proc /sys
+mount -tdevtmpfs -- devtmpfs /dev
+mount -tproc -- proc /proc
+mount -tsysfs -- sysfs /sys
+
+_bootarg_break=
+_bootarg_root=/dev/mmcblk0p2
+_bootarg_init=/sbin/init
+read -r -- _bootargs </proc/cmdline
+while [ -n "${_bootargs}" ] ; do
+    _bootarg_name="${_bootargs%%[= ]*}"
+    _bootargs="${_bootargs#"${_bootarg_name}"}"
+    _bootarg_eq="${_bootargs%"${_bootargs#?}"}"
+    _bootargs="${_bootargs#?}"
+    [ -n "${_bootarg_name}" ] || continue
+
+    if [ "${_bootarg_eq}" = "=" ] ; then
+        _bootarg_q="${_bootargs%"${_bootargs#?}"}"
+        if [ "${_bootarg_q}" = '"' ] || [ "${_bootarg_q}" = "'" ] ; then
+            # ... arg="value" ...
+            _bootargs="${_bootargs#?}"
+            _bootarg_value=""
+            while [ -n "${_bootargs}" ] ; do
+                _BOOTARG_C="${_bootargs%"${_bootargs#?}"}"
+                _bootargs="${_bootargs#?}"
+                case "${_BOOTARG_C}" in
+                    "${_bootarg_q}")
+                        break
+                    ;;
+                    "\\")
+                        _bootarg_value="${_bootarg_value}${_bootargs%"${_bootargs#?}"}"
+                        _bootargs="${_bootargs#?}"
+                    ;;
+                    *)
+                        _bootarg_value="${_bootarg_value}${_BOOTARG_C}"
+                    ;;
+                esac
+            done
+        else
+            # ... arg=value ...
+            _bootarg_value="${_bootargs%% *}"
+            _bootargs="${_bootargs#"${_bootarg_value}"}"
+        fi
+    else
+        # ... arg ...
+        _bootarg_value=1
+    fi
+
+    printf -- "[initramfs] bootarg # %s\n" "${_bootarg_name}=${_bootarg_value}"
+    case "${_bootarg_name}" in
+        break|root|init)
+            eval "_bootarg_${_bootarg_name}=\${_bootarg_value}"
+        ;;
+        *)
+        ;;
+    esac
+done
+unset -- _bootarg_name _bootarg_value _bootarg_q _bootarg_eq
+
+if [ -n "${_bootarg_break}" ] ; then
+    while [ ! -e /continue ] ; do
+        printf -- "[initramfs] break # %s\n" \
+          "**NOTE:** Create /continue and exit shell to continue" \
+          "**NOTE:** The /continue will be source'd - you may override the environment"
+        sh
+        sleep 1
+    done
+    . /continue
+else
+    printf -- "[initramfs] break # %s\n" \
+      "**NOTE:** Pass break in bootargs to hack into the initramfs shell"
+fi
+
+printf -- "[initramfs] mount # root=%s\n" "${_bootarg_root}"
+install -d -- /mnt/root /mnt/overlay/lower /mnt/overlay/upper /mnt/overlay/work
+for _try in 1 2 3 4 5 6 7 8 9 10 ; do
+    [ ! -e "${_bootarg_root}" ] || break
+    sleep 1
+done
+mount -oro -- "${_bootarg_root}" /mnt/overlay/lower || exit
+mount -toverlay -olowerdir=/mnt/overlay/lower -oupperdir=/mnt/overlay/upper \
+  -oworkdir=/mnt/overlay/work -- overlay /mnt/root || exit
+
+printf -- "[initramfs] switch_root # init=%s\n" "${_bootarg_init}"
+install -d -- /mnt/root/dev /mnt/root/proc /mnt/root/sys
+mount -omove -- /dev /mnt/root/dev
+mount -omove -- /proc /mnt/root/proc
+mount -omove -- /sys /mnt/root/sys
+exec switch_root /mnt/root "${_bootarg_init}"
