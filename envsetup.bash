@@ -1,7 +1,10 @@
 #! /bin/false --
 
-XILINX_VIVADO="${XILINX_VIVADO-/opt/Xlx/Vivado_Vitis2024.2/Vivado/2024.2}"
-XILINX_VITIS="${XILINX_VITIS-/opt/Xlx/Vivado_Vitis2024.2/Vitis/2024.2}"
+[[ ! -e "${PWD}/envsetup.local.bash" ]] \
+  || source -- "${PWD}/envsetup.local.bash"
+
+XILINX_VIVADO="${XILINX_VIVADO-/opt/Xilinx/2025.1/Vivado}"
+XILINX_VITIS="${XILINX_VITIS-/opt/Xilinx/2025.1/Vitis}"
 
 source -- "${XILINX_VIVADO}/settings64.sh"
 source -- "${XILINX_VITIS}/settings64.sh"
