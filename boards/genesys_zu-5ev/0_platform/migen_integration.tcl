@@ -47,8 +47,9 @@ proc export_migen_conf {} {
     }
     close $fp
 
+    ipx::package_project -import_files
     set fp [open mi_xci_files.txt w]
-    foreach xci_file [get_files *.xci] {
+    foreach xci_file [glob -directory [get_property ROOT_DIRECTORY [ipx::current_core]] */*/*.xci] {
         puts $fp $xci_file
     }
     close $fp

@@ -38,10 +38,10 @@ set_property -dict [list \
 
 # Peripheral - I2C
 set_property -dict [list \
-    CONFIG.PSU__I2C0__PERIPHERAL__IO {MIO 22 .. 23} \
     CONFIG.PSU__I2C0__PERIPHERAL__ENABLE {1} \
-    CONFIG.PSU__I2C1__PERIPHERAL__IO {MIO 8 .. 9} \
+    CONFIG.PSU__I2C0__PERIPHERAL__IO {MIO 22 .. 23} \
     CONFIG.PSU__I2C1__PERIPHERAL__ENABLE {1} \
+    CONFIG.PSU__I2C1__PERIPHERAL__IO {MIO 8 .. 9} \
 ] [get_bd_cells zynq_ultra_ps_e_0]
 
 # Peripheral - QSPI

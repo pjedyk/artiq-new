@@ -144,18 +144,19 @@ class BdCell(Module):
 
 
 class XilinxPlatformAuto(XilinxPlatform):
-    def __init__(self, build_dir: Path):
-        part = read_value(build_dir / MI_PART_TXT)
+    def __init__(self, vivado_build_dir: Path):
+        part = read_value(vivado_build_dir / MI_PART_TXT)
         super().__init__(part, [], name="genesys_zu-5ev", toolchain="vivado")
+        self.ips: set[str] = set()
 
         self.add_platform_command("set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]")
 
         self.bd_cells: Dict[str, BdCell] = {}
-        for bd_cell_name in read_list(build_dir / MI_BD_CELLS_TXT):
+        for bd_cell_name in read_list(vivado_build_dir / MI_BD_CELLS_TXT):
             assert bd_cell_name not in self.bd_cells
-            self.bd_cells[bd_cell_name] = BdCell(build_dir / bd_cell_name)
+            self.bd_cells[bd_cell_name] = BdCell(vivado_build_dir / bd_cell_name)
 
-        for xci_file in read_list(build_dir / MI_XCI_FILES_TXT):
+        for xci_file in read_list(vivado_build_dir / MI_XCI_FILES_TXT):
             self.add_ip(xci_file)
 
     def import_submodules_to(self, module: Module) -> None:

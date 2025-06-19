@@ -13,5 +13,4 @@ $(O):
 	mkdir -- "$(@)"
 
 THIS = $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
-
 include $(wildcard */build.mk)
