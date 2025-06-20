@@ -4,7 +4,7 @@ DISTRO = "petalinux"
 DL_DIR = "_BUILD_/downloads"
 SSTATE_DIR = "_BUILD_/sstate-cache"
 SSTATE_MIRRORS = " \
-    file://.*  https://petalinux.xilinx.com/sswreleases/rel-v2024.2/aarch64/sstate-cache/PATH;downloadfilename=PATH \
+    file://.*  https://petalinux.xilinx.com/sswreleases/rel-v2025.1/aarch64/sstate-cache/PATH;downloadfilename=PATH \
 "
 
 BB_HASHSERVE = ""

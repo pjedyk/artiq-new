@@ -1,179 +1,87 @@
 [submodule "migen"]
 	path = common/migen
 	url = ../../elhep/migen.git
-[submodule "common/yocto/rel-v2024.2/sources/yocto-scripts"]
-	path = common/yocto/rel-v2024.2/sources/yocto-scripts
-	url = https://github.com/Xilinx/yocto-scripts.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-xilinx"]
-	path = common/yocto/rel-v2024.2/sources/meta-xilinx
-	url = https://github.com/Xilinx/meta-xilinx.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-xilinx-tools"]
-	path = common/yocto/rel-v2024.2/sources/meta-xilinx-tools
-	url = https://github.com/Xilinx/meta-xilinx-tools.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-arm"]
-	path = common/yocto/rel-v2024.2/sources/meta-arm
-	url = https://github.com/Xilinx/meta-arm.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-petalinux"]
-	path = common/yocto/rel-v2024.2/sources/meta-petalinux
-	url = https://github.com/Xilinx/meta-petalinux.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-xilinx-tsn"]
-	path = common/yocto/rel-v2024.2/sources/meta-xilinx-tsn
-	url = https://github.com/Xilinx/meta-xilinx-tsn.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-kria"]
-	path = common/yocto/rel-v2024.2/sources/meta-kria
-	url = https://github.com/Xilinx/meta-kria.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-embedded-plus"]
-	path = common/yocto/rel-v2024.2/sources/meta-embedded-plus
-	url = https://github.com/Xilinx/meta-embedded-plus.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/poky"]
-	path = common/yocto/rel-v2024.2/sources/poky
-	url = https://github.com/Xilinx/poky.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-mingw"]
-	path = common/yocto/rel-v2024.2/sources/meta-mingw
-	url = https://github.com/Xilinx/meta-mingw.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-virtualization"]
-	path = common/yocto/rel-v2024.2/sources/meta-virtualization
-	url = https://github.com/Xilinx/meta-virtualization.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-security"]
-	path = common/yocto/rel-v2024.2/sources/meta-security
-	url = https://github.com/Xilinx/meta-security.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-openembedded"]
-	path = common/yocto/rel-v2024.2/sources/meta-openembedded
-	url = https://github.com/Xilinx/meta-openembedded.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-openamp"]
-	path = common/yocto/rel-v2024.2/sources/meta-openamp
-	url = https://github.com/Xilinx/meta-openamp.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-qt5"]
-	path = common/yocto/rel-v2024.2/sources/meta-qt5
-	url = https://github.com/Xilinx/meta-qt5.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-aws"]
-	path = common/yocto/rel-v2024.2/sources/meta-aws
-	url = https://github.com/Xilinx/meta-aws.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-ros"]
-	path = common/yocto/rel-v2024.2/sources/meta-ros
-	url = https://github.com/Xilinx/meta-ros.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-rauc"]
-	path = common/yocto/rel-v2024.2/sources/meta-rauc
-	url = https://github.com/Xilinx/meta-rauc.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-jupyter"]
-	path = common/yocto/rel-v2024.2/sources/meta-jupyter
-	url = https://github.com/Xilinx/meta-jupyter.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-system-controller"]
-	path = common/yocto/rel-v2024.2/sources/meta-system-controller
-	url = https://github.com/Xilinx/meta-system-controller.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-vitis"]
-	path = common/yocto/rel-v2024.2/sources/meta-vitis
-	url = https://github.com/Xilinx/meta-vitis.git
-	branch = rel-v2024.2
-[submodule "common/yocto/rel-v2024.2/sources/meta-amd-adaptive-socs"]
-	path = common/yocto/rel-v2024.2/sources/meta-amd-adaptive-socs
-	url = https://github.com/Xilinx/meta-amd-adaptive-socs.git
-	branch = rel-v2024.2
 [submodule "common/yocto/rel-v2025.1/sources/yocto-scripts"]
-	path = common/yocto/rel-v2025.1/sources/yocto-scripts
+	path = common/yocto/xilinx_rel-v2025.1/sources/yocto-scripts
 	url = https://github.com/Xilinx/yocto-scripts.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/manifest"]
-	path = common/yocto/rel-v2025.1/sources/manifest
+	path = common/yocto/xilinx_rel-v2025.1/sources/manifest
 	url = https://github.com/Xilinx/yocto-manifests.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-xilinx"]
-	path = common/yocto/rel-v2025.1/sources/meta-xilinx
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-xilinx
 	url = https://github.com/Xilinx/meta-xilinx.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-xilinx-tools"]
-	path = common/yocto/rel-v2025.1/sources/meta-xilinx-tools
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-xilinx-tools
 	url = https://github.com/Xilinx/meta-xilinx-tools.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-arm"]
-	path = common/yocto/rel-v2025.1/sources/meta-arm
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-arm
 	url = https://github.com/Xilinx/meta-arm.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-petalinux"]
-	path = common/yocto/rel-v2025.1/sources/meta-petalinux
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-petalinux
 	url = https://github.com/Xilinx/meta-petalinux.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-xilinx-tsn"]
-	path = common/yocto/rel-v2025.1/sources/meta-xilinx-tsn
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-xilinx-tsn
 	url = https://github.com/Xilinx/meta-xilinx-tsn.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-kria"]
-	path = common/yocto/rel-v2025.1/sources/meta-kria
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-kria
 	url = https://github.com/Xilinx/meta-kria.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/poky"]
-	path = common/yocto/rel-v2025.1/sources/poky
+	path = common/yocto/xilinx_rel-v2025.1/sources/poky
 	url = https://github.com/Xilinx/poky.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-mingw"]
-	path = common/yocto/rel-v2025.1/sources/meta-mingw
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-mingw
 	url = https://github.com/Xilinx/meta-mingw.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-virtualization"]
-	path = common/yocto/rel-v2025.1/sources/meta-virtualization
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-virtualization
 	url = https://github.com/Xilinx/meta-virtualization.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-security"]
-	path = common/yocto/rel-v2025.1/sources/meta-security
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-security
 	url = https://github.com/Xilinx/meta-security.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-openembedded"]
-	path = common/yocto/rel-v2025.1/sources/meta-openembedded
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-openembedded
 	url = https://github.com/Xilinx/meta-openembedded.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-openamp"]
-	path = common/yocto/rel-v2025.1/sources/meta-openamp
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-openamp
 	url = https://github.com/Xilinx/meta-openamp.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-qt5"]
-	path = common/yocto/rel-v2025.1/sources/meta-qt5
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-qt5
 	url = https://github.com/Xilinx/meta-qt5.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-aws"]
-	path = common/yocto/rel-v2025.1/sources/meta-aws
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-aws
 	url = https://github.com/Xilinx/meta-aws.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-ros"]
-	path = common/yocto/rel-v2025.1/sources/meta-ros
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-ros
 	url = https://github.com/Xilinx/meta-ros.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-rauc"]
-	path = common/yocto/rel-v2025.1/sources/meta-rauc
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-rauc
 	url = https://github.com/Xilinx/meta-rauc.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-jupyter"]
-	path = common/yocto/rel-v2025.1/sources/meta-jupyter
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-jupyter
 	url = https://github.com/Xilinx/meta-jupyter.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-vitis"]
-	path = common/yocto/rel-v2025.1/sources/meta-vitis
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-vitis
 	url = https://github.com/Xilinx/meta-vitis.git
 	branch = rel-v2025.1
 [submodule "common/yocto/rel-v2025.1/sources/meta-amd-adaptive-socs"]
-	path = common/yocto/rel-v2025.1/sources/meta-amd-adaptive-socs
+	path = common/yocto/xilinx_rel-v2025.1/sources/meta-amd-adaptive-socs
 	url = https://github.com/Xilinx/meta-amd-adaptive-socs.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-amd-edf"]
-	path = common/yocto/rel-v2025.1/sources/meta-amd-edf
-	url = https://github.com/Xilinx/meta-amd-edf.git
 	branch = rel-v2025.1

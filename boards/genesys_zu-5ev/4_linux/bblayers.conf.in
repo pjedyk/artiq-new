@@ -32,7 +32,6 @@ BBLAYERS ?= " \
   _YOCTO_/sources/meta-xilinx/meta-xilinx-contrib \
   _YOCTO_/sources/meta-virtualization \
   _YOCTO_/sources/meta-kria \
-  _YOCTO_/sources/meta-embedded-plus \
   _YOCTO_/sources/meta-security \
   _YOCTO_/sources/meta-security/meta-tpm \
   _YOCTO_/sources/meta-xilinx-tsn \
@@ -42,9 +41,8 @@ BBLAYERS ?= " \
   _YOCTO_/sources/meta-aws \
   _YOCTO_/sources/meta-jupyter \
   _YOCTO_/sources/meta-rauc \
-  _YOCTO_/sources/meta-system-controller \
   _YOCTO_/sources/meta-ros/meta-ros-common \
   _YOCTO_/sources/meta-ros/meta-ros2 \
   _YOCTO_/sources/meta-ros/meta-ros2-jazzy \
-  _LINUX_/meta-artiq \
+  _YOCTO_/../meta-artiq-xilinx \
 "
