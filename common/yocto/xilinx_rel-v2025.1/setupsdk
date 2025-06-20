@@ -1,1 +1,1 @@
-sources/yocto-scripts/setupsdk
+../meta-artiq-xilinx/scripts/setupsdk

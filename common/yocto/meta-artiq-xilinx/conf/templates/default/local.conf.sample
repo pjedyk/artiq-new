@@ -1,8 +1,10 @@
-MACHINE = "zynqmp-generic"
+MACHINE = "zynqmp-artiq"
 DISTRO = "petalinux"
 
-DL_DIR = "_BUILD_/downloads"
-SSTATE_DIR = "_BUILD_/sstate-cache"
+DL_DIR = "${TOPDIR}/../downloads"
+SSTATE_DIR = "${TOPDIR}/../sstate-cache"
+INHERIT += "own-mirrors"
+SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/rel-v2025.1/downloads"
 SSTATE_MIRRORS = " \
     file://.*  https://petalinux.xilinx.com/sswreleases/rel-v2025.1/aarch64/sstate-cache/PATH;downloadfilename=PATH \
 "
@@ -25,4 +27,4 @@ SKIP_META_TPM_SANITY_CHECK = "1"
 SKIP_META_GNOME_SANITY_CHECK = "1"
 SKIP_META_RAUC_FEATURE_CHECK = "1"
 
-include _GEN_MACHINECONF_CONF_
+include gen-machineconf.conf

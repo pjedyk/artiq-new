@@ -1,0 +1,12 @@
+#! /bin/false --
+
+T="/${BASH_SOURCE[0]}" T="${T%/*}" T="${T#/}" T="${T:-.}"
+T="$( cd -- "${T}" && pwd -- )"
+
+[[ -n "${TEMPLATECONF+X}" ]] \
+  || TEMPLATECONF="${T}/../meta-artiq-xilinx/conf/templates/default"
+
+[[ "${PATH}" =~ (^|:)"${T}/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf"(:|$) ]] \
+  || PATH="${T}/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf${PATH:+":${PATH}"}"
+
+source -- "${T}/sources/poky/oe-init-build-env" "${@}"
