@@ -1,0 +1,3 @@
+part  /boot      --source rootfs --change-directory=boot  --fixed-size=128M  --fstype=vfat  --label boot  --active  --align 4  --fsoptions=ro,noatime  --use-uuid
+part  /          --source rootfs --exclude-path=boot/                        --fstype=ext4  --label root            --align 4  --extra-space=16M
+part  /mnt/data                                           --fixed-size=128M  --fstype=ext4  --label data            --align 4  --fsoptions=noatime     --use-uuid

@@ -1,3 +1,6 @@
+# SEE: https://docs.amd.com/r/en-US/pg201-zynq-ultrascale-plus-processing-system/User-Parameters
+# SEE: build/zynq_ultra_ps_e_0/properties.txt
+
 # System Configuration
 set_property -dict [list \
     CONFIG.PSU__USE__IRQ0 {1} \

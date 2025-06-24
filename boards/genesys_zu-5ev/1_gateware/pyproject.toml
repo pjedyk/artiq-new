@@ -15,6 +15,10 @@ disallow_subclassing_any = false
 module = "migen.*"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "vitis.*"
+ignore_missing_imports = true
+
 [tool.pylint.main]
 ignore-patterns = [".+\\.pyi"]
 ignored-modules = "vitis"

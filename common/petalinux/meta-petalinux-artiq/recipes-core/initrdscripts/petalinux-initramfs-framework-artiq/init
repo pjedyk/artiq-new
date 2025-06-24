@@ -94,7 +94,9 @@ if [ -n "${_bootarg_break}" ] ; then
     . /continue
 else
     printf -- "[initramfs] break # %s\n" \
-      "**NOTE:** Pass break in bootargs to hack into the initramfs shell"
+      "**NOTE:** Pass break in bootargs to hack into the initramfs shell" \
+      "**NOTE:**     sudo mount -oremount,rw /boot" \
+      "**NOTE:**     echo extra_bootargs=break | sudo tee /boot/uEnv.txt"
 fi
 
 printf -- "[initramfs] mount # root=%s\n" "${_bootarg_root}"
