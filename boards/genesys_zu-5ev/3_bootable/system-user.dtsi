@@ -2,6 +2,8 @@
 /* SEE: kernel-source/Documentation/devicetree/bindings/remoteproc/xlnx,zynqmp-r5fss.yaml */
 /* SEE: kernel-source/Documentation/devicetree/bindings/mailbox/xlnx,zynqmp-ipi-mailbox.yaml */
 
+/* SEE: src/resource_table.c */
+
 &{/} {
 	reserved-memory {
 		#address-cells = <2>;
@@ -10,42 +12,52 @@
 
 		rproc_0_reserved: rproc@3ed00000 {
 			no-map;
-			reg = <0x0 0x3ed00000 0x0 0x40000>;
+			reg = <0x0 0x3ed00000 0x0 0x40000>;  /* 256KiB */
 		};
 
 		rpu0vdev0vring0: rpu0vdev0vring0@3ed40000 {
 			no-map;
-			reg = <0x0 0x3ed40000 0x0 0x4000>;
+			reg = <0x0 0x3ed40000 0x0 0x4000>;  /* 16KiB */
 		};
 
 		rpu0vdev0vring1: rpu0vdev0vring1@3ed44000 {
 			no-map;
-			reg = <0x0 0x3ed44000 0x0 0x4000>;
+			reg = <0x0 0x3ed44000 0x0 0x4000>;  /* 16KiB */
 		};
 
 		rpu0vdev0buffer: rpu0vdev0buffer@3ed48000 {
 			no-map;
-			reg = <0x0 0x3ed48000 0x0 0x100000>;
+			reg = <0x0 0x3ed48000 0x0 0x100000>;  /* 1MiB */
+		};
+
+		rpu0trace: rpu0trace@3ee48000 {
+			no-map;
+			reg = <0x0 0x3ee48000 0x0 0x10000>;  /* 64KiB */
 		};
 
 		rproc_1_reserved: rproc@3ef00000 {
 			no-map;
-			reg = <0x0 0x3ef00000 0x0 0x40000>;
+			reg = <0x0 0x3ef00000 0x0 0x40000>;  /* 256KiB */
 		};
 
 		rpu1vdev0vring0: rpu1vdev0vring0@3ef40000 {
 			no-map;
-			reg = <0x0 0x3ef40000 0x0 0x4000>;
+			reg = <0x0 0x3ef40000 0x0 0x4000>;  /* 16KiB */
 		};
 
 		rpu1vdev0vring1: rpu1vdev0vring1@3ef44000 {
 			no-map;
-			reg = <0x0 0x3ef44000 0x0 0x4000>;
+			reg = <0x0 0x3ef44000 0x0 0x4000>;  /* 16KiB */
 		};
 
 		rpu1vdev0buffer: rpu1vdev0buffer@3ef48000 {
 			no-map;
-			reg = <0x0 0x3ef48000 0x0 0x100000>;
+			reg = <0x0 0x3ef48000 0x0 0x100000>;  /* 1MiB */
+		};
+
+		rpu1trace: rpu1trace@3f048000 {
+			no-map;
+			reg = <0x0 0x3f048000 0x0 0x10000>;  /* 64KiB */
 		};
 	};
 
@@ -74,10 +86,8 @@
 			                <&zynqmp_firmware 16>;  /* PD_R5_0_BTCM */
 
 			memory-region = <&rproc_0_reserved>, <&rpu0vdev0buffer>,
-			                <&rpu0vdev0vring0>, <&rpu0vdev0vring1>;
-			// mboxes = <&ipi_mailbox_rpu0 0>, <&ipi_mailbox_rpu0 1>;
-			// mbox-names = "tx", "rx";
-			/* FIXME */
+			                <&rpu0vdev0vring0>, <&rpu0vdev0vring1>,
+			                <&rpu0trace>;
 		};
 
 		r5f_1: r5f@1 {
@@ -92,40 +102,11 @@
 			                <&zynqmp_firmware 18>;  /* PD_R5_1_BTCM */
 
 			memory-region = <&rproc_1_reserved>, <&rpu1vdev0buffer>,
-			                <&rpu1vdev0vring0>, <&rpu1vdev0vring1>;
-			// mboxes = <&ipi_mailbox_rpu1 0>, <&ipi_mailbox_rpu1 1>;
-			// mbox-names = "tx", "rx";
-			/* FIXME */
+			                <&rpu1vdev0vring0>, <&rpu1vdev0vring1>,
+			                <&rpu1trace>;
 		};
 	};
 };
-
-/*
-&ipi7 {
-	status = "okay";
-
-	ipi_mailbox_rpu0: mailbox@ff990600 {
-		compatible = "xlnx,zynqmp-ipi-dest-mailbox";
-		reg = <0x0 0xff990600 0x0 0x20>, <0x0 0xff990620 0x0 0x20>,
-		      <0x0 0xff9900c0 0x0 0x20>, <0x0 0xff9900e0 0x0 0x20>;
-		reg-names = "local_request_region", "local_response_region",
-		            "remote_request_region", "remote_response_region";
-		#mbox-cells = <1>;
-		xlnx,ipi-id = <1>;
-	};
-
-	ipi_mailbox_rpu1: mailbox@ff990640 {
-		compatible = "xlnx,zynqmp-ipi-dest-mailbox";
-		reg = <0x0 0xff990640 0x0 0x20>, <0x0 0xff990660 0x0 0x20>,
-		      <0x0 0xff9902c0 0x0 0x20>, <0x0 0xff9902e0 0x0 0x20>;
-		reg-names = "local_request_region", "local_response_region",
-		            "remote_request_region", "remote_response_region";
-		#mbox-cells = <1>;
-		xlnx,ipi-id = <2>;
-	};
-};
-*/
-/* FIXME */
 
 &sdhci1 {
 	disable-wp;

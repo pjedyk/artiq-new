@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11";
+    nixpkgs.url = "nixpkgs/nixos-25.05";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +21,7 @@
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         pkgs.alejandra
+        pkgs.clang-tools
 
         (pkgs.python3.withPackages (ps: [
           ps.isort
@@ -31,7 +32,7 @@
           ps.pyyaml
         ]))
 
-        (pkgs.rust-bin.stable."1.75.0".default.override {
+        (pkgs.rust-bin.stable."1.84.0".default.override {
           extensions = ["rust-src"];
           targets = ["armv7r-none-eabihf"];
         })

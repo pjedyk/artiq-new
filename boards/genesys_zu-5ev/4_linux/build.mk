@@ -29,9 +29,9 @@ $(O_SETUPSDK): | $(O_LINUX)
 $(O_SDT_TOP_BIT): $(O_TOP_BIT) $(O_FSBL_ELF)
 	cp -fT -- "$(O_TOP_BIT)" "$(O_SDT_TOP_BIT)"
 
-$(O_GEN_MACHINECONF_FLAG): $(O_all_CONF) $(O_SETUPSDK) $(O_SDT_TOP_BIT)
+$(O_GEN_MACHINECONF_FLAG): $(O_SETUPSDK) $(O_SDT_TOP_BIT)
 	source -- "$(O_SETUPSDK)" && gen-machineconf \
-	  $(if $(MENUCONFIG),--menuconfig) \
+	  $(if $(MENUCONFIG),--menuconfig=project) \
 	  --add-config='CONFIG_SUBSYSTEM_COMPONENT_FSBL_FROM_LOCAL_PATH=y' \
 	  --add-config='CONFIG_SUBSYSTEM_COMPONENT_FSBL_ELF_PATH="$(O_FSBL_ELF)"' \
 	  --add-config='CONFIG_YOCTO_INCLUDE_MACHINE_NAME="zynqmp-artiq"' \

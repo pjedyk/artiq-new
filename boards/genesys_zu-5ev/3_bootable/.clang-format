@@ -1,0 +1,16 @@
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+BasedOnStyle: "WebKit"
+ColumnLimit: 80
+
+BreakBeforeBraces: "Custom"
+BraceWrapping:
+  AfterStruct: true
+  AfterFunction: true
+  BeforeElse: true
+
+AllowShortFunctionsOnASingleLine: "None"
+InsertBraces: true
+PointerAlignment: "Middle"
+QualifierAlignment: "Right"
+SpaceAfterCStyleCast: true
