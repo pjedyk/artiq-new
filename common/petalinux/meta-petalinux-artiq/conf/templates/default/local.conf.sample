@@ -3,7 +3,7 @@ DISTRO = "petalinux-artiq"
 
 # SEE: meta-xilinx/meta-xilinx-core/dynamic-layers/openamp-layer/recipes-bsp/device-tree/device-tree.bbappend
 # SEE: meta-xilinx/meta-xilinx-core/dynamic-layers/openamp-layer/recipes-core/packagegroups/packagegroup-openamp.bb
-ENABLE_OPENAMP_DTSI = "2"
+ENABLE_OPENAMP_DTSI = "0"
 
 DL_DIR = "${TOPDIR}/../downloads"
 SSTATE_DIR = "${TOPDIR}/../sstate-cache"
