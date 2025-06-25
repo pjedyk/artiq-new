@@ -63,6 +63,10 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     standalone_r5_0 = hw_pf.get_domain("standalone_r5_0")
     assert isinstance(standalone_r5_0, Domain)
 
+    user_dtsi_local = vitis_ws / "hw_pf" / "hw" / "sdt" / user_dtsi.name
+    if not cmp(user_dtsi, user_dtsi_local):
+        copyfile(user_dtsi, user_dtsi_local)
+
     xfsbl_ddr_init_left = SCRIPT_HOME / "xfsbl_ddr_init.c"
     xfsbl_ddr_init_right = vitis_ws / "hw_pf" / "zynqmp_fsbl" / "xfsbl_ddr_init.c"
     if not cmp(xfsbl_ddr_init_left, xfsbl_ddr_init_right):

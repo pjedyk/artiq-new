@@ -15,22 +15,23 @@
 			reg = <0x0 0x3ed00000 0x0 0x40000>;  /* 256KiB */
 		};
 
-		rpu0vdev0vring0: rpu0vdev0vring0@3ed40000 {
+		rpu0vdev0vring0: vdev0vring0@3ed40000 {
 			no-map;
 			reg = <0x0 0x3ed40000 0x0 0x4000>;  /* 16KiB */
 		};
 
-		rpu0vdev0vring1: rpu0vdev0vring1@3ed44000 {
+		rpu0vdev0vring1: vdev0vring1@3ed44000 {
 			no-map;
 			reg = <0x0 0x3ed44000 0x0 0x4000>;  /* 16KiB */
 		};
 
-		rpu0vdev0buffer: rpu0vdev0buffer@3ed48000 {
+		rpu0vdev0buffer: vdev0buffer@3ed48000 {
+			compatible = "shared-dma-pool";
 			no-map;
 			reg = <0x0 0x3ed48000 0x0 0x100000>;  /* 1MiB */
 		};
 
-		rpu0trace: rpu0trace@3ee48000 {
+		rpu0trace: trace@3ee48000 {
 			no-map;
 			reg = <0x0 0x3ee48000 0x0 0x10000>;  /* 64KiB */
 		};
@@ -40,22 +41,23 @@
 			reg = <0x0 0x3ef00000 0x0 0x40000>;  /* 256KiB */
 		};
 
-		rpu1vdev0vring0: rpu1vdev0vring0@3ef40000 {
+		rpu1vdev0vring0: vdev0vring0@3ef40000 {
 			no-map;
 			reg = <0x0 0x3ef40000 0x0 0x4000>;  /* 16KiB */
 		};
 
-		rpu1vdev0vring1: rpu1vdev0vring1@3ef44000 {
+		rpu1vdev0vring1: vdev0vring1@3ef44000 {
 			no-map;
 			reg = <0x0 0x3ef44000 0x0 0x4000>;  /* 16KiB */
 		};
 
-		rpu1vdev0buffer: rpu1vdev0buffer@3ef48000 {
+		rpu1vdev0buffer: vdev0buffer@3ef48000 {
+			compatible = "shared-dma-pool";
 			no-map;
 			reg = <0x0 0x3ef48000 0x0 0x100000>;  /* 1MiB */
 		};
 
-		rpu1trace: rpu1trace@3f048000 {
+		rpu1trace: trace@3f048000 {
 			no-map;
 			reg = <0x0 0x3f048000 0x0 0x10000>;  /* 64KiB */
 		};
