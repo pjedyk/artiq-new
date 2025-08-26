@@ -1,4 +1,4 @@
-/envsetup.local.bash
+/envsetup.local.sh
 /.direnv
 
 # Python

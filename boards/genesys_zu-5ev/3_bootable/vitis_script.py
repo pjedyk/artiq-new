@@ -86,7 +86,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     assert isinstance(ld_file, Ldfile)
 
     src_files = list(map(attrgetter("name"), src_dir.glob("*.[chS]")))
-    app.import_files(str(src_dir), src_files, dest_dir_in_cmp='src')
+    app.import_files(str(src_dir), src_files, dest_dir_in_cmp="src")
     app.set_app_config("USER_LINK_DIRECTORIES", [str(rust_fw_dir)])
     app.set_app_config("USER_LINK_LIBRARIES", ["rust_firmware"])
 

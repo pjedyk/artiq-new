@@ -1,6 +1,9 @@
-[submodule "migen"]
+[submodule "common/artiq"]
+	path = common/artiq
+	url = git@github.com:m-labs/artiq.git
+[submodule "common/migen"]
 	path = common/migen
-	url = ../../elhep/migen.git
+	url = git@github.com:m-labs/migen.git
 [submodule "common/yocto/rel-v2025.1/sources/yocto-scripts"]
 	path = common/petalinux/rel-v2025.1/sources/yocto-scripts
 	url = https://github.com/Xilinx/yocto-scripts.git

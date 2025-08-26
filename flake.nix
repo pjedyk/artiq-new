@@ -1,8 +1,13 @@
 {
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "nixpkgs/nixos-25.05";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    artiq = {
+      url = "path:common/artiq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -11,6 +16,7 @@
     self,
     nixpkgs,
     rust-overlay,
+    artiq,
   }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -20,27 +26,42 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
+        # Code quality tools (linters/formatters)
         pkgs.alejandra
+        pkgs.shellcheck
         pkgs.clang-tools
+        pkgs.python3Packages.isort
+        pkgs.python3Packages.black
+        pkgs.python3Packages.pylint
+        pkgs.python3Packages.mypy
 
-        (pkgs.python3.withPackages (ps: [
-          ps.isort
-          ps.black
-          ps.pylint
-          ps.mypy
-          ps.colorama
-          ps.pyyaml
-        ]))
-
-        (pkgs.rust-bin.stable."1.84.0".default.override {
+        # Rust toolchain
+        (pkgs.rust-bin.stable."1.87.0".default.override {
           extensions = ["rust-src"];
           targets = ["armv7r-none-eabihf"];
         })
+
+        # ARTIQ and Migen dependencies
+        pkgs.python3Packages.colorama
+        artiq.packages.${system}.artiq.propagatedBuildInputs
+
+        # The gen-machineconf tool requires pyymal
+        pkgs.python3Packages.pyyaml
+
+        # Various Python packages - mainly for local source code resolution and
+        # letting mypy/pylint work
+        pkgs.python3Packages.setuptools
+        pkgs.python3Packages.types-setuptools
       ];
+
       env = {
         LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
         BB_ENV_PASSTHROUGH_ADDITIONS = "LOCALE_ARCHIVE";
       };
+
+      shellHook = ''
+        . "./envsetup.sh"
+      '';
     };
   };
 }

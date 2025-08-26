@@ -8,7 +8,6 @@ from typing import Never, Optional, Sequence
 from migen.build.generic_platform import IOStandard, Pins
 from migen.fhdl.module import Module
 from migen.fhdl.structure import ClockDomain, Signal
-
 from vivado_integration import XilinxPlatformAuto
 
 
