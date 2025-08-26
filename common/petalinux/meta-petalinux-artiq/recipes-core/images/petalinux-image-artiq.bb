@@ -17,7 +17,8 @@ IMAGE_FEATURES += " \
 IMAGE_INSTALL += " \
     networkmanager-daemon networkmanager-nmcli \
     avahi-daemon avahi-utils avahi-dnsconfd \
-    tmux vim \
+    tmux vim rsync \
+    packagegroup-artiq \
 "
 
 IMAGE_LINGUAS = "c"
