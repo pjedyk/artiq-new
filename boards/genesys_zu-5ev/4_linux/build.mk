@@ -5,7 +5,7 @@ BITBAKE_IMAGE := petalinux-image-artiq
 MENUCONFIG :=
 
 I_LINUX := $(I)/$(LINUX)
-I_YOCTO := $(abspath ../../common/petalinux/rel-v2025.1)
+I_YOCTO := $(abspath ../../common/petalinux/rel-v2025.2)
 I_SETUPSDK := $(I_YOCTO)/setupsdk
 
 O_LINUX := $(O)/linux

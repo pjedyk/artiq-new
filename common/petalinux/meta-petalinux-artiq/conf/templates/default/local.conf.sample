@@ -8,9 +8,9 @@ ENABLE_OPENAMP_DTSI = "0"
 DL_DIR = "${TOPDIR}/../downloads"
 SSTATE_DIR = "${TOPDIR}/../sstate-cache"
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/rel-v2025.1/downloads"
+SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/rel-v2025.2/downloads"
 SSTATE_MIRRORS = " \
-    file://.*  https://petalinux.xilinx.com/sswreleases/rel-v2025.1/aarch64/sstate-cache/PATH;downloadfilename=PATH \
+    file://.*  https://petalinux.xilinx.com/sswreleases/rel-v2025.2/aarch64/sstate-cache/PATH;downloadfilename=PATH \
 "
 
 BB_HASHSERVE = ""

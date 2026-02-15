@@ -4,87 +4,95 @@
 [submodule "common/migen"]
 	path = common/migen
 	url = git@github.com:m-labs/migen.git
-[submodule "common/yocto/rel-v2025.1/sources/yocto-scripts"]
-	path = common/petalinux/rel-v2025.1/sources/yocto-scripts
+[submodule "common/petalinux/rel-v2025.2/sources/yocto-scripts"]
+	path = common/petalinux/rel-v2025.2/sources/yocto-scripts
 	url = https://github.com/Xilinx/yocto-scripts.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/manifest"]
-	path = common/petalinux/rel-v2025.1/sources/manifest
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/manifest"]
+	path = common/petalinux/rel-v2025.2/sources/manifest
 	url = https://github.com/Xilinx/yocto-manifests.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-xilinx"]
-	path = common/petalinux/rel-v2025.1/sources/meta-xilinx
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-xilinx"]
+	path = common/petalinux/rel-v2025.2/sources/meta-xilinx
 	url = https://github.com/Xilinx/meta-xilinx.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-xilinx-tools"]
-	path = common/petalinux/rel-v2025.1/sources/meta-xilinx-tools
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-xilinx-tools"]
+	path = common/petalinux/rel-v2025.2/sources/meta-xilinx-tools
 	url = https://github.com/Xilinx/meta-xilinx-tools.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-arm"]
-	path = common/petalinux/rel-v2025.1/sources/meta-arm
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-arm"]
+	path = common/petalinux/rel-v2025.2/sources/meta-arm
 	url = https://github.com/Xilinx/meta-arm.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-petalinux"]
-	path = common/petalinux/rel-v2025.1/sources/meta-petalinux
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-petalinux"]
+	path = common/petalinux/rel-v2025.2/sources/meta-petalinux
 	url = https://github.com/Xilinx/meta-petalinux.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-xilinx-tsn"]
-	path = common/petalinux/rel-v2025.1/sources/meta-xilinx-tsn
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-xilinx-tsn"]
+	path = common/petalinux/rel-v2025.2/sources/meta-xilinx-tsn
 	url = https://github.com/Xilinx/meta-xilinx-tsn.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-kria"]
-	path = common/petalinux/rel-v2025.1/sources/meta-kria
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-kria"]
+	path = common/petalinux/rel-v2025.2/sources/meta-kria
 	url = https://github.com/Xilinx/meta-kria.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/poky"]
-	path = common/petalinux/rel-v2025.1/sources/poky
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/poky"]
+	path = common/petalinux/rel-v2025.2/sources/poky
 	url = https://github.com/Xilinx/poky.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-mingw"]
-	path = common/petalinux/rel-v2025.1/sources/meta-mingw
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-mingw"]
+	path = common/petalinux/rel-v2025.2/sources/meta-mingw
 	url = https://github.com/Xilinx/meta-mingw.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-virtualization"]
-	path = common/petalinux/rel-v2025.1/sources/meta-virtualization
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-virtualization"]
+	path = common/petalinux/rel-v2025.2/sources/meta-virtualization
 	url = https://github.com/Xilinx/meta-virtualization.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-security"]
-	path = common/petalinux/rel-v2025.1/sources/meta-security
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-security"]
+	path = common/petalinux/rel-v2025.2/sources/meta-security
 	url = https://github.com/Xilinx/meta-security.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-openembedded"]
-	path = common/petalinux/rel-v2025.1/sources/meta-openembedded
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-openembedded"]
+	path = common/petalinux/rel-v2025.2/sources/meta-openembedded
 	url = https://github.com/Xilinx/meta-openembedded.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-openamp"]
-	path = common/petalinux/rel-v2025.1/sources/meta-openamp
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-openamp"]
+	path = common/petalinux/rel-v2025.2/sources/meta-openamp
 	url = https://github.com/Xilinx/meta-openamp.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-qt5"]
-	path = common/petalinux/rel-v2025.1/sources/meta-qt5
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-qt5"]
+	path = common/petalinux/rel-v2025.2/sources/meta-qt5
 	url = https://github.com/Xilinx/meta-qt5.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-aws"]
-	path = common/petalinux/rel-v2025.1/sources/meta-aws
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-aws"]
+	path = common/petalinux/rel-v2025.2/sources/meta-aws
 	url = https://github.com/Xilinx/meta-aws.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-ros"]
-	path = common/petalinux/rel-v2025.1/sources/meta-ros
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-ros"]
+	path = common/petalinux/rel-v2025.2/sources/meta-ros
 	url = https://github.com/Xilinx/meta-ros.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-rauc"]
-	path = common/petalinux/rel-v2025.1/sources/meta-rauc
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-rauc"]
+	path = common/petalinux/rel-v2025.2/sources/meta-rauc
 	url = https://github.com/Xilinx/meta-rauc.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-jupyter"]
-	path = common/petalinux/rel-v2025.1/sources/meta-jupyter
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-jupyter"]
+	path = common/petalinux/rel-v2025.2/sources/meta-jupyter
 	url = https://github.com/Xilinx/meta-jupyter.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-vitis"]
-	path = common/petalinux/rel-v2025.1/sources/meta-vitis
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-vitis"]
+	path = common/petalinux/rel-v2025.2/sources/meta-vitis
 	url = https://github.com/Xilinx/meta-vitis.git
-	branch = rel-v2025.1
-[submodule "common/yocto/rel-v2025.1/sources/meta-amd-adaptive-socs"]
-	path = common/petalinux/rel-v2025.1/sources/meta-amd-adaptive-socs
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-amd-adaptive-socs"]
+	path = common/petalinux/rel-v2025.2/sources/meta-amd-adaptive-socs
 	url = https://github.com/Xilinx/meta-amd-adaptive-socs.git
-	branch = rel-v2025.1
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-system-controller"]
+	path = common/petalinux/rel-v2025.2/sources/meta-system-controller
+	url = https://github.com/Xilinx/meta-system-controller.git
+	branch = rel-v2025.2
+[submodule "common/petalinux/rel-v2025.2/sources/meta-embedded-plus"]
+	path = common/petalinux/rel-v2025.2/sources/meta-embedded-plus
+	url = https://github.com/Xilinx/meta-embedded-plus.git
+	branch = rel-v2025.2

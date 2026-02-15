@@ -1,7 +1,7 @@
 [ ! -e "${PWD}/envsetup.local.sh" ] || . "${PWD}/envsetup.local.sh"
 
-XILINX_VIVADO="${XILINX_VIVADO-/opt/Xilinx/2025.1/Vivado}"
-XILINX_VITIS="${XILINX_VITIS-/opt/Xilinx/2025.1/Vitis}"
+XILINX_VIVADO="${XILINX_VIVADO-/opt/Xilinx/2025.2/Vivado}"
+XILINX_VITIS="${XILINX_VITIS-/opt/Xilinx/2025.2/Vitis}"
 export XILINX_VIVADO XILINX_VITIS
 . "${XILINX_VIVADO}/settings64.sh"
 . "${XILINX_VITIS}/settings64.sh"
