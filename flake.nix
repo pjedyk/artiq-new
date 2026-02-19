@@ -1,7 +1,7 @@
 {
   inputs = {
     self.submodules = true;
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,8 +42,8 @@
         })
 
         # ARTIQ and Migen dependencies
-        pkgs.python3Packages.colorama
         artiq.packages.${system}.artiq.propagatedBuildInputs
+        pkgs.python3Packages.colorama
 
         # The gen-machineconf tool requires pyymal
         pkgs.python3Packages.pyyaml
