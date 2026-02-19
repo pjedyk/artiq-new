@@ -1,6 +1,12 @@
 MACHINE = "zynqmp-artiq"
 DISTRO = "petalinux-artiq"
 
+# Disable uninative to avoid glibc version mismatch (GLIBC_PRIVATE symbol conflict). Implies the
+# need to remove virtual/crypt-native from ASSUME_PROVIDED since glibc 2.39+ dropped libcrypt (now
+# in libxcrypt).
+UNINATIVE_LOADER = ""
+ASSUME_PROVIDED:remove = "virtual/crypt-native"
+
 # SEE: meta-xilinx/meta-xilinx-core/dynamic-layers/openamp-layer/recipes-bsp/device-tree/device-tree.bbappend
 # SEE: meta-xilinx/meta-xilinx-core/dynamic-layers/openamp-layer/recipes-core/packagegroups/packagegroup-openamp.bb
 ENABLE_OPENAMP_DTSI = "0"
@@ -21,6 +27,7 @@ LICENSE_FLAGS_ACCEPTED = " \
     xilinx \
 "
 
+# SEE: common/petalinux/rel-v2025.2/sources/meta-petalinux/conf/templates/default/local.conf.sample
 SKIP_META_XILINX_MALI400_SANITY_CHECK = "1"
 SKIP_META_XILINX_STANDALONE_SANITY_CHECK = "1"
 SKIP_META_XILINX_STANDALONE_SDT_SANITY_CHECK = "1"
