@@ -12,7 +12,6 @@ all: $(FIRMWARE)
 $(FIRMWARE): $(O_LIBRUST_FIRMWARE_A)
 
 $(O_LIBRUST_FIRMWARE_A):
-	env -C "$(I_FIRMWARE)" -- cargo build \
-	  --target-dir="$(O_CARGO_BUILD)" \
+	env -C "$(I_FIRMWARE)" -- cargo build --target-dir="$(O_CARGO_BUILD)" \
 	  --profile="$(subst debug,dev,$(CONFIG))"
 -include $(O_LIBRUST_FIRMWARE_D)

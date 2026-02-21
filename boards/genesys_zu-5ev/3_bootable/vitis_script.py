@@ -1,6 +1,7 @@
 #! /bin/false --
 
 # pylint: disable=too-many-locals
+# pylint: disable=too-many-statements
 
 import sys
 from argparse import ArgumentParser
@@ -32,7 +33,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     arg_parser.add_argument("-P", "--platform-xsa", default="platform.xsa")
     arg_parser.add_argument("-D", "--user-dtsi", default=_path_to(SCRIPT_HOME, "system-user.dtsi"))
     arg_parser.add_argument("-S", "--src-dir", default=_path_to(SCRIPT_HOME, "src"))
-    arg_parser.add_argument("-R", "--rust-fw-dir", default=_path_to("cargo-build", "armv7r-none-eabihf", "debug"))
+    arg_parser.add_argument(
+        "-R", "--rust-fw-dir", default=_path_to("cargo-build", "armv7r-none-eabihf", "debug")
+    )
     p_args = arg_parser.parse_args(argv[1:])
 
     vitis_ws = Path(p_args.workspace_dir).resolve()

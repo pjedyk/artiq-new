@@ -1,6 +1,6 @@
 # https://github.com/koalaman/shellcheck/blob/master/shellcheck.1.md#rc-files
 
-shell=sh
+shell=bash
 enable=all
 severity=style
-disable=SC1091  # (info): Not following: {} was not specified as input (see shellcheck -x).
+disable=SC1091  # Not following

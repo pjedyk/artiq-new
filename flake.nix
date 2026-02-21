@@ -54,13 +54,8 @@
         pkgs.python3Packages.types-setuptools
       ];
 
-      env = {
-        LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-        BB_ENV_PASSTHROUGH_ADDITIONS = "LOCALE_ARCHIVE";
-      };
-
       shellHook = ''
-        . "./envsetup.sh"
+        . "./envsetup.bash"
       '';
     };
   };

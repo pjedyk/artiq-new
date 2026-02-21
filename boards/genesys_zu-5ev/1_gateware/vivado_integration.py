@@ -104,7 +104,9 @@ class BdCell(Module):
             signal = Signal(bits_sign=(left + 1, False), name=pin_name, reset_less=True)
         else:
             signal = Signal(bits_sign=(left + 1, False), name=pin_name, reset=int(default, 2))
-        signal_shifted = Signal(bits_sign=(width, False), name=f"{pin_name}__SHIFTED", reset_less=True)
+        signal_shifted = Signal(
+            bits_sign=(width, False), name=f"{pin_name}__SHIFTED", reset_less=True
+        )
         self.comb += signal_shifted.eq(signal[right : left + 1])
 
         self._glue[pin_name] = signal

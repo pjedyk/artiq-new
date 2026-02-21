@@ -1,3 +1,5 @@
+# pylint: disable=too-few-public-methods
+
 from logging import Logger, getLogger
 from socket import AF_INET6, SHUT_RDWR, create_server, socket
 from threading import Semaphore, Thread, current_thread
@@ -39,7 +41,9 @@ class SocketThreadPool:
         self.collect_garbage()
         with self._sem:
             t_name = f"T-{name}#{self._next_id}"
-            self._list.append(_SocketThread(t_name, sock, Thread(target=handler, name=t_name, args=(self, sock))))
+            self._list.append(
+                _SocketThread(t_name, sock, Thread(target=handler, name=t_name, args=(self, sock)))
+            )
             self._next_id += 1
 
     def collect_garbage(self) -> None:
