@@ -5,10 +5,11 @@ from logging import DEBUG, Formatter, StreamHandler, getLogger
 from signal import SIG_IGN, SIGINT, SIGPIPE, SIGTERM, signal
 from threading import Event
 
-from .comm import CommAnalyzer, CommKernel, CommMgmt, CommMoninj, Server, SocketThreadPool
+from .comm import CommAnalyzer, CommKernel, CommMgmt, CommMoninj
+from .server import SocketPool
 
 LOGGER = getLogger()
-LOGGER_DEFAULT_FMT = "%(relativeCreated)08d | %(levelname)8s | %(name)s : %(message)s"
+LOGGER_DEFAULT_FMT = "%(relativeCreated)08d | [%(levelname)8s] %(name)s@%(threadName)s: %(message)s"
 LOGGER_DEFAULT_DATEFMT = "%Y-%m-%d %H:%M:%S"
 LOGGER_DEFAULT_LEVEL = DEBUG
 
@@ -34,12 +35,12 @@ def main(argv: Sequence[str] | None = None, call_setup_logger: bool = True) -> N
     arg_parser.add_argument("-J", "--moninj-port", default=CommMoninj.DEFAULT_PORT, type=int)
     p_args = arg_parser.parse_args(argv[1:])
 
-    pool = SocketThreadPool()
+    pool = SocketPool()
     try:
-        pool.new(*Server(CommMgmt.DEFAULT_NAME, p_args.mgmt_port, CommMgmt())())
-        pool.new(*Server(CommKernel.DEFAULT_NAME, p_args.kernel_port, CommKernel())())
-        pool.new(*Server(CommAnalyzer.DEFAULT_NAME, p_args.analyzer_port, CommAnalyzer())())
-        pool.new(*Server(CommMoninj.DEFAULT_NAME, p_args.moninj_port, CommMoninj())())
+        pool.add_server(CommMgmt(CommMgmt.DEFAULT_NAME, p_args.mgmt_port))
+        pool.add_server(CommKernel(CommKernel.DEFAULT_NAME, p_args.kernel_port))
+        pool.add_server(CommAnalyzer(CommAnalyzer.DEFAULT_NAME, p_args.analyzer_port))
+        pool.add_server(CommMoninj(CommMoninj.DEFAULT_NAME, p_args.moninj_port))
 
         stop = Event()
         signal(SIGINT, lambda signalnum, frame: stop.set())
